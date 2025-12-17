@@ -288,6 +288,23 @@ def _logic_get_or_create_organization(
 # ==== MCP 工具 ====
 
 @mcp.tool
+def search_person(name: str = None, email: str = None): # type: ignore
+    """
+    [給 Agent 的工具] 在 Pipedrive 中搜尋聯絡人。
+    優先使用 email 搜尋以獲得最精確結果。
+    """
+    # 直接呼叫上面的邏輯函式
+    return _logic_search_pipedrive_person(name=name, email=email)
+
+@mcp.tool
+def search_organization(name: str, tax_id: str = None): # type: ignore
+    """
+    [給 Agent 的工具] 在 Pipedrive 中搜尋組織。
+    優先使用 tax_id (統一編號) 搜尋。
+    """
+    return _logic_search_pipedrive_organization(name=name, tax_id=tax_id)
+
+@mcp.tool
 def add_pipedrive_deal(
     title: str, 
     value: float,
