@@ -228,7 +228,7 @@ def _logic_get_or_create_person(
     優先使用 email 搜尋，確保不會重複建立相同 email 的聯絡人
     """
     # 先搜尋是否存在
-    existing_person = search_pipedrive_person(name=person_name, email=person_email) # type: ignore
+    existing_person = _logic_search_pipedrive_person(name=person_name, email=person_email) # type: ignore
     
     if existing_person:
         print(f"找到現有聯絡人: {existing_person.get('name')} (ID: {existing_person.get('id')})")
@@ -264,7 +264,7 @@ def _logic_get_or_create_organization(
     優先使用統一編號搜尋，確保不會重複建立相同統編的組織
     """
     # 先搜尋是否存在
-    existing_org = search_pipedrive_organization(org_name, org_tax_id) # type: ignore
+    existing_org = _logic_create_pipedrive_organization(org_name, org_tax_id) # type: ignore
     
     if existing_org:
         print(f"找到現有組織: {existing_org.get('name')} (ID: {existing_org.get('id')})")
